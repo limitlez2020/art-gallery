@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { ArrowLeftIcon, ArrowLongLeftIcon, ArrowRightIcon } from "@heroicons/react/24/solid"
+import { ArrowLeftIcon, ArrowLongLeftIcon, ArrowRightIcon, ArrowUpTrayIcon } from "@heroicons/react/24/solid"
 
 export default function Home() {
 
@@ -11,13 +11,18 @@ export default function Home() {
     <div className="flex flex-col h-full min-h-screen bg-neutral-200">
       {/* NavBar */}
       <div className="flex justify-center w-full bg-black text-white p-2">
+        {/* Container */}
         <div className="flex flex-row justify-between items-center w-[95%] gap-20">
           <p>collart</p>
-          <p className="text-sm">upload</p>
+          <div className="flex flex-row justify-center items-center gap-2 border-[1px] border-white px-3 py-1 text-sm cursor-pointer">
+            <p>upload</p>
+            <ArrowUpTrayIcon className="size-3"/>
+          </div>
         </div>
       </div>
+
       {/* Main Content Container: */}
-      <div className="flex flex-col w-full h-full gap-20 justify-center items-center my-20">
+      <div className="flex flex-col w-full h-full gap-20 justify-center items-center mt-20">
         {/* Header */}
         <div className="flex flex-col">
           <div className="flex flex-row gap-4 items-end">
@@ -33,7 +38,7 @@ export default function Home() {
         {/* Gallery: */}
         <div className="flex justify-between items-center boder-2 border-black w-5/6 h-full mt-10 gap-10">
           {/* Previous Arrow */}
-          <button className="flex justify-center items-center w-10 h-10 rounded-full border-black border-[1px]">
+          <button className="flex justify-center items-center w-10 h-10 rounded-full border-black border-[1px] cursor-pointer">
             <ArrowLeftIcon className="size-5"/>
           </button>
           {/* Gallery Images + Detail */}
@@ -54,15 +59,27 @@ export default function Home() {
             </div>
           </div>
           {/* Next Arrow: */}
-          <button className="flex justify-center items-center w-10 h-10 rounded-full border-black border-[1px]">
+          <button className="flex justify-center items-center w-10 h-10 rounded-full border-black border-[1px] cursor-pointer">
             <ArrowRightIcon className="size-5"/>
           </button>
         </div>
 
 
         {/* Footer: */}
-        <div>
-          Footer
+        <div className="flex flex-col w-full h-64 mt-20 bg-black text-neutral-100 items-center">
+          {/* CTA */}
+          <div className="flex flex-col items-center justify-center text-6xl font-semibold mt-5">
+            <p className="text-neutral-500 -mb-1">CREATE & SHARE</p>
+            <p>YOUR ARTWORK</p>
+          </div>
+          {/* Button: */}
+          <button className="flex justify-center items-center mt-4 bg-neutral-200 
+                             w-fit text-black text-sm px-4 py-1 cursor-pointer">
+            upload
+            <ArrowUpTrayIcon className="ml-2 size-3"/>
+          </button>
+          {/* Copyright stuff: */}
+          <p className="text-neutral-500 mt-10 text-xs">2025 Art Gallery. All rights reserved.</p>
         </div>
       </div>
     </div>
