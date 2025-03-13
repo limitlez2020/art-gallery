@@ -1,101 +1,70 @@
+"use client"
+
+import { useState } from "react";
 import Image from "next/image";
+import { ArrowLeftIcon, ArrowLongLeftIcon, ArrowRightIcon } from "@heroicons/react/24/solid"
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.js
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  return (
+    /* Main container: */
+    <div className="flex flex-col h-full min-h-screen bg-neutral-200">
+      {/* NavBar */}
+      <div className="flex justify-center w-full bg-black text-white p-2">
+        <div className="flex flex-row justify-between items-center w-[95%] gap-20">
+          <p>collart</p>
+          <p className="text-sm">upload</p>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </div>
+      {/* Main Content Container: */}
+      <div className="flex flex-col w-full h-full gap-20 justify-center items-center my-20">
+        {/* Header */}
+        <div className="flex flex-col">
+          <div className="flex flex-row gap-4 items-end">
+            <h1 className="text-9xl font-medium">Art</h1>
+            <p className="text-sm pb-4 text-neutral-700">home of unique art by college artist</p>
+          </div>
+          <h1 className="text-9xl font-medium -mt-4">Gallery</h1>
+        </div>
+
+        {/* Dividing Line: */}
+        <div className="w-5/6 h-[1px] bg-black/40 mt-10"/>
+
+        {/* Gallery: */}
+        <div className="flex justify-between items-center boder-2 border-black w-5/6 h-full mt-10 gap-10">
+          {/* Previous Arrow */}
+          <button className="flex justify-center items-center w-10 h-10 rounded-full border-black border-[1px]">
+            <ArrowLeftIcon className="size-5"/>
+          </button>
+          {/* Gallery Images + Detail */}
+          <div className="w-2/3 h-60 sm:h-96">
+            {/* Image */}
+            <div className="w-full h-full overflow-hidden cursor-pointer">
+              <Image
+                src={"/abstract_img.jpg"}
+                alt={"Abstract Art"}
+                width={1920} height={1080}
+                className="w-fit h-fit hover:scale-105 transition-transform ease-in-out duration-1000"
+              />
+            </div>
+            {/* Details */}
+            <div className="flex flex-row justify-between gap-14 text-black/70 mt-1">
+              <p className="flex text-xs w-5/6 justify-start">Little description about the artwork we see above</p>
+              <p className="flex text-xs w-1/6 justify-end">Jan. 2019</p>
+            </div>
+          </div>
+          {/* Next Arrow: */}
+          <button className="flex justify-center items-center w-10 h-10 rounded-full border-black border-[1px]">
+            <ArrowRightIcon className="size-5"/>
+          </button>
+        </div>
+
+
+        {/* Footer: */}
+        <div>
+          Footer
+        </div>
+      </div>
     </div>
   );
 }
