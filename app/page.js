@@ -58,7 +58,7 @@ export default function Home() {
       <div className="flex justify-center w-full bg-black text-white p-2">
         {/* Container */}
         <div className="flex flex-row justify-between items-center w-[95%] gap-20">
-          <p>collart</p>
+          <Link href={""}>collart</Link>
           <div className="flex flex-row justify-center items-center gap-2 border-[1px] border-white px-3 py-1 text-sm cursor-pointer">
             <p>upload</p>
             <ArrowUpTrayIcon className="size-3"/>
@@ -93,7 +93,8 @@ export default function Home() {
           {/* Gallery Images + Detail */}
           <div className="w-2/3 h-60 sm:h-132 border-[1px] border-black">
             {/* Image */}
-            <Link href={"/categoryPage"}>
+            {/* Link to the dynamic route segment: */}
+            <Link href={`/categories/${categories[currentCategory].name.toLowerCase()}`}>
               <div className="w-full h-full overflow-hidden cursor-pointer">
                 <Image
                   src={categories[currentCategory].image}
