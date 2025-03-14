@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { ArrowLeftIcon, ArrowLongLeftIcon, ArrowRightIcon, ArrowUpTrayIcon } from "@heroicons/react/24/solid"
+import Link from "next/link";
 
 export default function Home() {
   /* State for the different art categories: */
@@ -92,14 +93,16 @@ export default function Home() {
           {/* Gallery Images + Detail */}
           <div className="w-2/3 h-60 sm:h-132 border-[1px] border-black">
             {/* Image */}
-            <div className="w-full h-full overflow-hidden cursor-pointer">
-              <Image
-                src={categories[currentCategory].image}
-                alt={"Art Category"}
-                width={1920} height={1080}
-                className="w-fit h-fit hover:scale-105 transition-transform ease-in-out duration-700"
-              />
-            </div>
+            <Link href={"/categoryPage"}>
+              <div className="w-full h-full overflow-hidden cursor-pointer">
+                <Image
+                  src={categories[currentCategory].image}
+                  alt={"Art Category"}
+                  width={1920} height={1080}
+                  className="w-fit h-fit hover:scale-105 transition-transform ease-in-out duration-700"
+                />
+              </div>
+            </Link>
             {/* Details */}
             <div className="flex flex-col justify-between text-black/70 mt-3">
               <p className="text-2xl md:text-4xl lg:text-6xl font-semibold justify-start">{categories[currentCategory].name}</p>
