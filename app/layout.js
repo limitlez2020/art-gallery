@@ -7,8 +7,8 @@ const poppins = Poppins({
 })
 
 export const metadata = {
-  title: "Daily Animal Facts",
-  description: "Get daily facts on animals",
+  title: "Art Gallery",
+  description: "Art Gallery for college students artworks",
 };
 
 export default function RootLayout({ children }) {
