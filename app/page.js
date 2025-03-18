@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { ArrowLeftIcon, ArrowLongLeftIcon, ArrowRightIcon, ArrowUpTrayIcon } from "@heroicons/react/24/solid"
 import Link from "next/link";
+import NavBar from "./components/NavBar";
 
 export default function Home() {
   /* State for the different art categories: */
@@ -55,16 +56,7 @@ export default function Home() {
     /* Main container: */
     <div className="flex flex-col h-full min-h-screen bg-neutral-200">
       {/* NavBar */}
-      <div className="flex justify-center w-full bg-black text-white p-2">
-        {/* Container */}
-        <div className="flex flex-row justify-between items-center w-[95%] gap-20">
-          <Link href={""}>collart</Link>
-          <div className="flex flex-row justify-center items-center gap-2 border-[1px] border-white px-3 py-1 text-sm cursor-pointer">
-            <p>upload</p>
-            <ArrowUpTrayIcon className="size-3"/>
-          </div>
-        </div>
-      </div>
+      <NavBar/>
 
       {/* Main Content Container: */}
       <div className="flex flex-col w-full h-full gap-20 justify-center items-center mt-20">
