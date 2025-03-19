@@ -16,6 +16,35 @@ import {
 } from "@/components/ui/select"
 
 export default function UploadArt () {
+
+  /* States for the form elements: */
+  const [artistName, setArtistName] = useState("")
+  const [artworkName, setArtworkName] = useState("")
+  const [artCategory, setArtCategory] = useState("")
+  const [artworkStory, setArtworkStory] = useState("")
+  const [artworkImage, setArtworkImage] = useState(null)
+
+  /* Function to get all the data submitted from the form: */
+  const handleSubmit = (event) => {
+    /* Prevent page reload */
+    // TODO: This prevents the relaod which is good but
+    // it also prevents it from making field reuqired - whihc is bad
+    event.preventDefault();
+
+    /* Turn data gotten from the formelements into one object */
+    const formData = {
+      artistName,
+      artworkName,
+      artCategory,
+      artworkStory,
+      artworkImage,
+    }
+
+    // TODO: test - print the data
+    console.log(formData)
+  }
+
+
   return (
     <div className="flex flex-col h-full min-h-screen bg-neutral-200">
       <NavBar/>
@@ -23,7 +52,8 @@ export default function UploadArt () {
       {/* Form Container */}
       <div className="flex my-20 w-[93%] justify-center items-center self-center">
         {/* Form */}
-        <div className="flex flex-col w-1/2 border-[1px] items-center bg-white py-8">
+        <form className="flex flex-col w-1/2 border-[1px] items-center bg-white py-8"
+              onClick={handleSubmit}>
           {/* Header: */}
           <div className="flex flex-col items-center">
             <p className="text-sm">Upload Artwork</p>
@@ -34,6 +64,7 @@ export default function UploadArt () {
           </div>
 
           {/* Upload area */}
+          {/* TODO: get the file to pass to backend */}
           <div className="flex flex-col p-2 mt-5 w-5/6 items-center justify-center border-[1px] border-neutral-300 border-dotted">
             <FileUpload/>
           </div>
@@ -48,6 +79,8 @@ export default function UploadArt () {
                 type="text" 
                 className="w-full border-[1px] border-neutral-200 text-xs p-2"
                 placeholder="Type your name"
+                value={artistName}
+                onChange={(e) => {setArtistName(e.target.value)}}
               />
             </div>
 
@@ -59,13 +92,15 @@ export default function UploadArt () {
                 type="text" 
                 className="w-full border-[1px] border-neutral-200 text-xs p-2"
                 placeholder="Type the name of your artwork"
+                value={artworkName}
+                onChange={(e) => {setArtworkName(e.target.value)}}
               />
             </div>
 
             {/* Artwork Category: */}
             <div className="flex flex-col w-full">
               <p className="text-xs">Artwork Category</p>
-              <Select>
+              <Select onValueChange={setArtCategory}>
                 <SelectTrigger className="w-full rounded-none text-xs">
                   <SelectValue placeholder="Select an art category" />
                 </SelectTrigger>
@@ -87,20 +122,18 @@ export default function UploadArt () {
                 required
                 className="text-w-full border-[1px] h-20 border-neutral-200 text-xs p-2"
                 placeholder="Story behind your artwork"
+                value={artworkStory}
+                onChange={(e) => setArtworkStory(e.target.value)}
               />
             </div>
-
-
-            {/* Submit the form */}
-            <button className="flex self-center justify-center bg-black p-2 px-4 text-white text-xs cursor-pointer">
-              Submit
-            </button>
-
           </div>
 
+          {/* Submit the form */}
+          <button className="flex self-center justify-center bg-black mt-4 p-2 px-10 text-white text-xs cursor-pointer">
+            Submit
+          </button>
 
-
-        </div>
+        </form>
       </div>
 
       <Footer/>
