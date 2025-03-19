@@ -61,13 +61,19 @@ export default function Home() {
 
       {/* Main Content Container: */}
       <div className="flex flex-col w-full h-full gap-20 justify-center items-center mt-20">
-        {/* Header */}
+        {/* Header Container */}
         <div className="flex flex-col w-full items-center">
-          <div className="flex flex-row gap-4 items-end">
-            <h1 className="text-7xl sm:text-9xl font-medium">Art</h1>
-            <p className="text-sm pb-4 text-neutral-700">home of unique art by college artist</p>
+          {/* Header */}
+          <div className="flex flex-col items-center sm:items-start">
+            <div className="flex flex-row gap-4 items-end">
+              <h1 className="text-7xl sm:text-9xl font-medium">Art</h1>
+              {/* Subheading: PC + Tablet */}
+              <p className="hidden sm:block text-sm pb-4 text-neutral-700">home of unique art by college artist</p>
+            </div>
+            <h1 className="text-7xl sm:text-9xl font-medium -mt-4">Gallery</h1>
           </div>
-          <h1 className="text-7xl sm:text-9xl font-medium -mt-4">Gallery</h1>
+          {/* Subheading: Phone*/}
+          <p className="sm:hidden text-xs pt-2 text-neutral-700">home of unique art by college artist</p>
         </div>
 
 
