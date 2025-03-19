@@ -5,6 +5,8 @@ import { useParams } from "next/navigation"
 import Link from "next/link"
 import Image from "next/image"
 import { ArrowUpTrayIcon } from "@heroicons/react/24/solid"
+import NavBar from "@/app/components/NavBar"
+import Footer from "@/app/components/Footer"
 
 
 export default function Category () {
@@ -32,16 +34,7 @@ export default function Category () {
     /* Main container: */
     <div className="flex flex-col h-full min-h-screen bg-neutral-200">
       {/* NavBar */}
-      <div className="flex justify-center w-full bg-black text-white p-2">
-        {/* Container */}
-        <div className="flex flex-row justify-between items-center w-[95%] gap-20">
-          <Link href={"/"}>collart</Link>
-          <div className="flex flex-row justify-center items-center gap-2 border-[1px] border-white px-3 py-1 text-sm cursor-pointer">
-            <p>upload</p>
-            <ArrowUpTrayIcon className="size-3"/>
-          </div>
-        </div>
-      </div>
+      <NavBar/>
 
       {/* Main Content Container: */}
       <div className="flex flex-col w-full h-full justify-center items-center mt-28">
@@ -64,6 +57,9 @@ export default function Category () {
           <div className="w-5/6 h-[1px] bg-neutral-400 mt-8"/>
         </div>
       </div>
+
+      {/* Footer: */}
+      <Footer/>
     </div>
   
   )
