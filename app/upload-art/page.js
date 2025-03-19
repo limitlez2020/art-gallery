@@ -21,7 +21,7 @@ export default function UploadArt () {
       <NavBar/>
       
       {/* Form Container */}
-      <div className="flex my-10 w-[93%] justify-center items-center self-center">
+      <div className="flex my-20 w-[93%] justify-center items-center self-center">
         {/* Form */}
         <div className="flex flex-col w-1/2 border-[1px] items-center bg-white py-8">
           {/* Header: */}
