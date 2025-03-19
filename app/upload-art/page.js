@@ -27,8 +27,6 @@ export default function UploadArt () {
   /* Function to get all the data submitted from the form: */
   const handleSubmit = (event) => {
     /* Prevent page reload */
-    // TODO: This prevents the relaod which is good but
-    // it also prevents it from making field reuqired - whihc is bad
     event.preventDefault();
 
     /* Turn data gotten from the formelements into one object */
@@ -52,8 +50,8 @@ export default function UploadArt () {
       {/* Form Container */}
       <div className="flex my-20 w-[93%] justify-center items-center self-center">
         {/* Form */}
-        <form className="flex flex-col w-1/2 border-[1px] items-center bg-white py-8"
-              onClick={handleSubmit}>
+        <form className="flex flex-col w-[90%] border-[1px] items-center bg-white py-8"
+              onSubmit={handleSubmit}>
           {/* Header: */}
           <div className="flex flex-col items-center">
             <p className="text-sm">Upload Artwork</p>
