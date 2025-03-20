@@ -10,6 +10,7 @@ import { db, storage } from "@/firebase.js"
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { time } from "framer-motion";
+import Link from "next/link";
 
 export default function UploadArt () {
 
@@ -96,11 +97,16 @@ export default function UploadArt () {
       <NavBar/>
       
       {/* Form Container */}
-      <div className="flex my-20 w-[93%] justify-center items-center self-center">
+      <div className="flex flex-grow my-20 w-[93%] justify-center items-center self-center">
         {submitted ? (
           /* Display message that the artwork has been submitted */
-          <div className="flex flex-grow h-full min-h-[69.7vh] bg-lack items-center justify-center">
-            ARTWORK has been submitted
+          <div className="flex flex-col bg-lack items-center justify-center">
+            <p className="text-7xl font-semibold">artwork</p>
+            <p className="text-7xl font-semibold">uploaded</p>
+            <Link className="mt-4 flex flex-row justify-center items-center gap-1" href={"/"}>
+              <p className="border-b-[1px] border-black/25 text-sm hover:scale-[100.5%]">check gallery to see your artwork</p>
+              <p>🖼️</p>
+            </Link>
           </div>
         ) : (
           /* Form */
