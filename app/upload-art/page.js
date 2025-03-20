@@ -5,15 +5,10 @@ import { ArrowDownTrayIcon, ArrowUpTrayIcon } from "@heroicons/react/24/solid";
 import Footer from "../components/Footer";
 import NavBar from "../components/NavBar";
 import { FileUpload } from "@/components/ui/file-upload";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
+import {Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue} from "@/components/ui/select"
+import { db, storage } from "@/firebase.js"
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 
 export default function UploadArt () {
 
@@ -23,23 +18,64 @@ export default function UploadArt () {
   const [artCategory, setArtCategory] = useState("")
   const [artworkStory, setArtworkStory] = useState("")
   const [artworkImage, setArtworkImage] = useState(null)
+  const [uploading, setUploading] = useState(false) /* Track if form is submitting */
 
-  /* Function to get all the data submitted from the form: */
-  const handleSubmit = (event) => {
+
+  /* Function to upload artwork image to the firebase database: */
+  const uploadImage = async (file) => {
+    /* Make sure file exists: */
+    if (!file) { return null }
+
+    try {
+      /* Create a reference to the storage: */
+      const storageRef = ref(storage, `artworks/${file.name}`);
+      /* Upload the file to the storage: */
+      await uploadBytes(storageRef, file);
+      /* Get the download URL of the uploaded file: */
+      const imageURL = await getDownloadURL(storageRef);
+      return imageURL;
+    }
+    catch (error) {
+      console.error("Error uploading image: ", error)
+      return null;
+    }
+  }
+
+
+  /* Function to get all the data submitted from the form
+   * and upload them all to the database: */
+  const handleSubmit = async (event) => {
     /* Prevent page reload */
     event.preventDefault();
+    setUploading(true);
 
-    /* Turn data gotten from the formelements into one object */
-    const formData = {
-      artistName,
-      artworkName,
-      artCategory,
-      artworkStory,
-      artworkImage,
+    try {
+      // TODO: Have to do image coz they want to charge me for storage
+      // const imageUrl = await uploadImage(artworkImage)
+  
+      /* Turn data gotten from the formelements into one object */
+      const artworkData = {
+        artistName,
+        artworkName,
+        artCategory,
+        artworkStory,
+        // TODO: uncomment below
+        // imageUrl,
+      };
+  
+      // TODO: test - print the data
+      console.log(artworkData)
+
+      /* Save the artwork data to the database */
+      await addDoc(collection(db, "artworks"), artworkData);
+      console.log("Artwork added to database", artworkData);
     }
-
-    // TODO: test - print the data
-    console.log(formData)
+    catch (error) {
+      console.error("Error submitting artwork: ", error)
+    }
+    finally {
+      setUploading(false);
+    }
   }
 
 
@@ -62,9 +98,8 @@ export default function UploadArt () {
           </div>
 
           {/* Upload area */}
-          {/* TODO: get the file to pass to backend */}
           <div className="flex flex-col p-2 mt-5 w-5/6 items-center justify-center border-[1px] border-neutral-300 border-dotted">
-            <FileUpload/>
+            <FileUpload onChange={(file) => setArtworkImage(file)}/>
           </div>
 
           {/* Artist and artwork details: */}
