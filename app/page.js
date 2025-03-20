@@ -64,7 +64,7 @@ export default function Home() {
         {/* Header Container */}
         <div className="flex flex-col w-full items-center">
           {/* Header */}
-          <div className="flex flex-col items-center sm:items-start">
+          <div className="flex flex-col items-start">
             <div className="flex flex-row gap-4 items-end">
               <h1 className="text-7xl sm:text-9xl font-medium">Art</h1>
               {/* Subheading: PC + Tablet */}
@@ -73,7 +73,7 @@ export default function Home() {
             <h1 className="text-7xl sm:text-9xl font-medium -mt-4">Gallery</h1>
           </div>
           {/* Subheading: Phone*/}
-          <p className="sm:hidden text-xs pt-2 text-neutral-700">home of unique art by college artist</p>
+          <p className="sm:hidden block text-xs pt-2 text-neutral-700">home of unique art by college artist</p>
         </div>
 
 
