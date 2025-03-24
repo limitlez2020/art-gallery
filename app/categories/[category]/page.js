@@ -37,19 +37,17 @@ export default function Category () {
       <NavBar/>
 
       {/* Main Content Container: */}
-      <div className="flex flex-col w-full h-full justify-center items-center mt-28">
+      <div className="flex flex-col grow w-full h-full justify-center items-center mt-28">
         {/* Header: */}
         <h1 className="text-3xl font-medium">{categoryName}</h1>
         {/* Category Artworks: */}
         <div className="flex flex-col justify-center items-center w-full gap-10 mt-8">
           {/* Artwork */}
           <div className="flex flex-col justify-center items-center">
-            {/* Dot: */}
-            <div className="size-5 rounded-full border-[4px] border-black"/>
             {/* Art-frame: */}
-            <div className="w-72 h-fit border-[10px] border-black -mt-3 shadow-xl">
-              {/* Image: */}
-              <Image src={art_url} alt="Artwork" width={1920} height={1080}/>
+            <div className="w-72 h-96 border-[1px] border-black -mt-3 shadow-xl">
+              {/* TODO: Image: */}
+              {/* <Image src={art_url} alt="Artwork" width={1920} height={1080}/> */}
             </div>
           </div>
 
