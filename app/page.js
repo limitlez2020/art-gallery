@@ -100,6 +100,7 @@ export default function Home() {
                   alt={"Art Category"}
                   width={1920} height={1080}
                   className="w-fit h-fit hover:scale-105 transition-transform ease-in-out duration-700"
+                  priority={true}
                 />
               </div>
             </Link>
