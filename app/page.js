@@ -21,7 +21,7 @@ export default function Home() {
     },
 
     {
-      image: "/minimal_1.jpg",
+      image: "/minimal.jpg",
       name: "MINIMALISM",
       art_total: 3
     },
