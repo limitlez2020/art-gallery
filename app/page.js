@@ -8,10 +8,12 @@ import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 import { Space_Grotesk } from "next/font/google";
 import { Orbitron } from "next/font/google";
+import { Space_Mono } from "next/font/google";
 import { Syne } from "next/font/google";
 
 const space_grotesk = Space_Grotesk({subsets: ["latin"]})
 const orbitron = Orbitron({subsets: ["latin"]})
+const space_mono = Space_Mono({subsets: ["latin"], weight: ["400", "700"]})
 const syne = Syne({subsets: ["latin"]})
 
 
@@ -86,6 +88,7 @@ export default function Home() {
 
 
         {/* Dividing Line: */}
+        {/* TODO: have the upload date of the art of the day here */}
         <div className={`${syne.className} flex flex-row w-5/6 items-center mt-24 gap-10`}>
           <p className="whitespace-nowrap">March 3</p>
           <div className="w-full h-[1px] bg-black/40"/>
