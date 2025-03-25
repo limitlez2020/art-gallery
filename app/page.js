@@ -66,12 +66,12 @@ export default function Home() {
 
   return (
     /* Main container: */
-    <div className="flex flex-col h-full min-h-screen bg-neutral-200">
+    <div className="flex flex-col h-full min-h-screen bg-black">
       {/* NavBar */}
       <NavBar/>
 
       {/* Main Content Container: */}
-      <div className="flex flex-col w-full h-full justify-center items-center mt-20">
+      <div className="bg-neutral-200 flex flex-col w-[99.5%] h-full self-center justify-center items-center mt-1 pt-20 rounded-md">
         {/* Header Container */}
         <div className="flex flex-col w-full items-center">
           {/* Header */}
@@ -104,7 +104,7 @@ export default function Home() {
           {/* Image + Detail */}
           <div className="w-full flex flex-col">
             {/* Image */}
-            <div className="w-full h-120 overflow-hidden cursor-pointer">
+            <div className="w-full h-80 md:h-120 lg:h-140 overflow-hidden cursor-pointer">
               <Image
                 src={"/art-of-day-placeholder.jpg"}
                 alt={"Art Category"}
@@ -114,21 +114,24 @@ export default function Home() {
               />
             </div>
             {/* Details */}
-            <div className="flex flex-row justify-between text-black/70 mt-3">
+            <div className="flex flex-row justify-between items-end text-black/70 mt-3">
+              {/* Title & Artist */}
               <div className="flex flex-col">
-                <p className="text-xl font-semibold justify-start">hand of man</p>
+                <p className="text-2xl font-semibold justify-start">hand of man</p>
                 <p className="-mt-1 text-sm justify-start text-start">by Equavious</p>
+                {/* Genre */}
+                <p className="-mt-1 text-sm justify-start text-start">genre: classical</p>
               </div>
 
-              <p className="text-base justify-start text-start">classical</p>
+              <div className="flex flex-col">
+                {/* Button to view artwork */}
+                <button className={`${space_grotesk.className} flex flex-row border-black border-b-[1px] hover:text-black justify-center items-center gap-3 cursor-pointer`}>
+                  <p className="text-lg">view artwork</p>
+                  <ArrowLongRightIcon className="size-7 stroke-[0.6]"/>
+                </button>
+              </div>
             </div>
           </div>
-
-          {/* Button to view artwork */}
-          <button className={`${space_grotesk.className} w-full h-full flex flex-row rounded-lg justify-end items-center gap-3 hover:gap-4 bg-black mt-12 py-3 pr-7 cursor-pointer`}>
-            <p className="text-2xl lg:text-3xl text-white/85">view artwork</p>
-            <ArrowLongRightIcon className="size-8 lg:size-11 text-white/85 stroke-[0.6]"/>
-          </button>
         </div>
 
 
