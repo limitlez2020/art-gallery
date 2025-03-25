@@ -125,9 +125,9 @@ export default function Home() {
           </div>
 
           {/* Button to view artwork */}
-          <button className={`${space_grotesk.className} w-full h-full flex flex-row rounded-lg justify-end items-center gap-4 bg-black mt-12 py-2 pr-7 cursor-pointer`}>
-            <p className="text-4xl text-white/85">view artwork</p>
-            <ArrowLongRightIcon className="size-11 text-white/85 stroke-[0.6]"/>
+          <button className={`${space_grotesk.className} w-full h-full flex flex-row rounded-lg justify-end items-center gap-3 hover:gap-4 bg-black mt-12 py-3 pr-7 cursor-pointer`}>
+            <p className="text-2xl lg:text-3xl text-white/85">view artwork</p>
+            <ArrowLongRightIcon className="size-8 lg:size-11 text-white/85 stroke-[0.6]"/>
           </button>
         </div>
 
