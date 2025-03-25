@@ -114,10 +114,10 @@ export default function Home() {
               />
             </div>
             {/* Details */}
-            <div className="flex flex-row justify-between items-end text-black/70 mt-3">
+            <div className="flex flex-row justify-between items-end text-black/70 mt-3 gap-3">
               {/* Title & Artist */}
               <div className="flex flex-col">
-                <p className="text-2xl font-semibold justify-start">hand of man</p>
+                <p className="text-xl md:text-2xl font-semibold justify-start">hand of man</p>
                 <p className="-mt-1 text-sm justify-start text-start">by Equavious</p>
                 {/* Genre */}
                 <p className="-mt-1 text-sm justify-start text-start">genre: classical</p>
@@ -126,7 +126,7 @@ export default function Home() {
               <div className="flex flex-col">
                 {/* Button to view artwork */}
                 <button className={`${space_grotesk.className} flex flex-row border-black border-b-[1px] hover:text-black justify-center items-center gap-3 cursor-pointer`}>
-                  <p className="text-lg">view artwork</p>
+                  <p className="text-base md:text-lg">view artwork</p>
                   <ArrowLongRightIcon className="size-7 stroke-[0.6]"/>
                 </button>
               </div>
