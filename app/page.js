@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { ArrowLeftIcon, ArrowLongLeftIcon, ArrowRightIcon, ArrowUpTrayIcon } from "@heroicons/react/24/solid"
+import { ArrowLongRightIcon } from "@heroicons/react/24/outline"
 import Link from "next/link";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
@@ -89,35 +90,60 @@ export default function Home() {
 
         {/* Dividing Line: */}
         {/* TODO: have the upload date of the art of the day here */}
-        <div className={`${syne.className} flex flex-row w-5/6 items-center mt-24 gap-10`}>
+        <div className="flex flex-row w-5/6 items-center mt-24 gap-10">
           <p className="whitespace-nowrap">March 3</p>
           <div className="w-full h-[1px] bg-black/40"/>
           <p>2025</p>
         </div>
 
 
+        {/* TODO: Get real art from database */}
         {/* Art of the day: */}
-        <div className="flex justify-center items-center w-5/6 h-full mt-2 mb-24">
+        <div className="flex flex-col justify-center items-center w-5/6 h-full mt-2 mb-24">
 
           {/* Image + Detail */}
-          <div className="w-full h-60 border-[1px] border-black">
+          <div className="w-full flex flex-col">
             {/* Image */}
-            <div className="w-full h-full overflow-hidden cursor-pointer">
+            <div className="w-full h-120 overflow-hidden cursor-pointer">
               <Image
                 src={"/art-of-day-placeholder.jpg"}
                 alt={"Art Category"}
-                width={1920} height={60}
-                className="w-fit h-fill hover:scale-105 transition-transform ease-in-out duration-700"
+                width={1920} height={1080}
+                className="w-[100%] h-[100%] object-cover hover:scale-105 transition-transform ease-in-out duration-700"
                 priority={true}
               />
             </div>
             {/* Details */}
-            <div className={`${syne.className} flex flex-col justify-between text-black/70 mt-3`}>
-              <p className="text-xl font-semibold justify-start">hand of God</p>
-              <p className="-mt-1 text-sm justify-start text-start">by Equavious</p>
+            <div className="flex flex-row justify-between text-black/70 mt-3">
+              <div className="flex flex-col">
+                <p className="text-xl font-semibold justify-start">hand of man</p>
+                <p className="-mt-1 text-sm justify-start text-start">by Equavious</p>
+              </div>
+
+              <p className="text-base justify-start text-start">classical</p>
             </div>
           </div>
+
+          {/* Button to view artwork */}
+          <button className={`${space_grotesk.className} w-full h-full flex flex-row rounded-lg justify-end items-center gap-4 bg-black mt-12 py-2 pr-7 cursor-pointer`}>
+            <p className="text-4xl text-white/85">view artwork</p>
+            <ArrowLongRightIcon className="size-11 text-white/85 stroke-[0.6]"/>
+          </button>
         </div>
+
+
+        {/* Bento Grid for the categories of artworks */}
+        {/* <div className="flex flex-row justify-center w-5/6 h-full gap-4 bg-black
+        mt-4 mb-24
+        sm:grid sm:grid-cols-2 sm:gap-4
+        md:grid md:grid-cols-3 md:gap-4
+        lg:grid lg:grid-cols-4 lg:gap-4
+        xl:grid xl:grid-cols-5 xl:gap-4
+        2xl:grid 2xl:grid-cols-6 2xl:gap-
+        4
+        ">
+          
+        </div> */}
 
 
         <Footer/>
