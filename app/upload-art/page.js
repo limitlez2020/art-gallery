@@ -114,7 +114,7 @@ export default function UploadArt () {
                 onSubmit={handleSubmit}>
             {/* Header: */}
             <div className="flex flex-col items-center">
-              <p className="text-base font-medium">Upload Artwork</p>
+              <p className="text-xl font-medium">Upload Artwork</p>
               <p
               className="font-normal text-neutral-400 dark:text-neutral-400 text-xs text-center">
               Drag or drop your files here or click to upload
