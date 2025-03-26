@@ -139,48 +139,40 @@ export default function Home() {
 
 
         {/* Categories: */}
-        <div className="flex flex-col w-5/6 h-full mb-24">
+        <div className="flex flex-col w-5/6 h-full mb-24 gap-3">
           {/* Header: */}
-          <p className={`${space_grotesk.className} text-3xl font-medium mb-6`}>CATEGORIES</p>
+          <p className={`${space_grotesk.className} self-center text-xl font-medium mb-3`}>CATEGORIES</p>
           
-          {/* Grids Container */}
-          <div className="flex justify-center w-full h-full bg-black rounded-sm py-1 px-1">
-            {/* Bento Grid */}
-            <div className="grid grid-cols-2 gap-1 w-full">
-              {/* 1st Category */}
-              <div className="flex flex-col h-64 md:h-96 lg:h-120 gap-1 col-span-1 row-span-1 bg-neutral-200 rounded-md">
-                <div className="flex w-full h-full overflow-hidden cursor-pointer">
-                  {/* <Image
-                    src={"/abstract.jpg"}
-                    alt={"Abstract Category"}
-                    width={1920} height={1080}
-                    className="w-[100%] h-[100%] object-cover hover:scale-102 transition-transform ease-in-out duration-700"
-                    priority={true}
-                  /> */}
-                </div>
-              </div>
-              {/* 2nd Category */}
-              <div className="flex flex-col gap-1 col-span-1 row-span-1 bg-neutral-200 rounded-md">
-                <div className=""></div>
-              </div>
-              {/* 3nd Category */}
-              <div className="flex flex-col h-64 md:h-96 lg:h-120 gap-1 col-span-2 row-span-1 bg-neutral-200 rounded-md">
-                <div className=""></div>
-              </div>
-              {/* 4th Category */}
-              <div className="flex flex-col h-64 md:h-96 lg:h-120 gap-1 col-span-1 row-span-1 bg-neutral-200 rounded-md">
-                <div className=""></div>
-              </div>
-              {/* 5th Category */}
-              <div className="flex flex-col gap-1 col-span-1 row-span-2 bg-neutral-200 rounded-md">
-                <div className=""></div>
-              </div>
-              {/* 6th Category */}
-              <div className="flex flex-col h-64 gap-1 col-span-1 row-span-1 bg-neutral-200 rounded-md">
-                <div className=""></div>
-              </div>
-            </div>
-          </div>
+          {/* Abstract */}
+          <button className="flex flex-row items-center justify-between gap-5 p-4 px-6 rounded-full border-[1px] border-black  cursor-pointer hover:bg-black/85 hover:text-white">
+            <p className="text-4xl">abstract</p>
+            <ArrowLongRightIcon className="size-10 stroke-1"/>
+          </button>
+
+          {/* Minimalism */}
+          <button className="flex flex-row items-center justify-between gap-5 p-4 px-6 rounded-full border-[1px] border-black cursor-pointer hover:bg-black/85 hover:text-white">
+            <p className="text-4xl">minimalism</p>
+            <ArrowLongRightIcon className="size-10 stroke-1"/>
+          </button>
+
+          {/* Realism */}
+          <button className="flex flex-row items-center justify-between gap-5 p-4 px-6 rounded-full border-[1px] border-black cursor-pointer hover:bg-black/85 hover:text-white">
+            <p className="text-4xl">realism</p>
+            <ArrowLongRightIcon className="size-10 stroke-1"/>
+          </button>
+
+          {/* Surrealism */}
+          <button className="flex flex-row items-center justify-between gap-5 p-4 px-6 rounded-full border-[1px] border-black cursor-pointer hover:bg-black/85 hover:text-white">
+            <p className="text-4xl">surrealism</p>
+            <ArrowLongRightIcon className="size-10 stroke-1"/>
+          </button>
+
+          {/* AI */}
+          <button className="flex flex-row items-center justify-between gap-5 p-4 px-6 rounded-full border-[1px] border-black cursor-pointer hover:bg-black/85 hover:text-white">
+            <p className="text-4xl">ai</p>
+            <ArrowLongRightIcon className="size-10 stroke-1"/>
+          </button>
+
         </div>
 
 
