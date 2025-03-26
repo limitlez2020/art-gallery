@@ -24,7 +24,7 @@ export default function NavBar () {
       {/* Right */}
       <div className="flex bg-neutral-200 w-1/3 justify-between items-center p-2 h-full rounded-md">
         {/* Icon */}
-        <PercentBadgeIcon className="size-6 fill-black"/>
+        <PercentBadgeIcon className="size-5 fill-black"/>
         {/* Button */}
         <Link href={"/upload-art"}>
           <button className="flex flex-row justify-center items-center underline cursor-pointer hover:font-semibold">

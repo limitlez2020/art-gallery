@@ -99,7 +99,7 @@ export default function Home() {
 
         {/* TODO: Get real art from database */}
         {/* Art of the day: */}
-        <div className="flex flex-col justify-center items-center w-5/6 h-full mt-2 mb-24">
+        <div className="flex flex-col justify-center items-center w-5/6 h-full mt-2">
 
           {/* Image + Detail */}
           <div className="w-full flex flex-col">
@@ -135,18 +135,53 @@ export default function Home() {
         </div>
 
 
-        {/* Bento Grid for the categories of artworks */}
-        {/* <div className="flex flex-row justify-center w-5/6 h-full gap-4 bg-black
-        mt-4 mb-24
-        sm:grid sm:grid-cols-2 sm:gap-4
-        md:grid md:grid-cols-3 md:gap-4
-        lg:grid lg:grid-cols-4 lg:gap-4
-        xl:grid xl:grid-cols-5 xl:gap-4
-        2xl:grid 2xl:grid-cols-6 2xl:gap-
-        4
-        ">
+        <div className="flex flex-col mt-34 mb-34 w-5/6 border-b-[1px] border-black"/>
+
+
+        {/* Categories: */}
+        <div className="flex flex-col w-5/6 h-full mb-24">
+          {/* Header: */}
+          <p className={`${space_grotesk.className} text-3xl font-medium mb-6`}>CATEGORIES</p>
           
-        </div> */}
+          {/* Grids Container */}
+          <div className="flex justify-center w-full h-full bg-black rounded-sm py-1 px-1">
+            {/* Bento Grid */}
+            <div className="grid grid-cols-2 gap-1 w-full">
+              {/* 1st Category */}
+              <div className="flex flex-col h-64 md:h-96 lg:h-120 gap-1 col-span-1 row-span-1 bg-neutral-200 rounded-md">
+                <div className="flex w-full h-full overflow-hidden cursor-pointer">
+                  {/* <Image
+                    src={"/abstract.jpg"}
+                    alt={"Abstract Category"}
+                    width={1920} height={1080}
+                    className="w-[100%] h-[100%] object-cover hover:scale-102 transition-transform ease-in-out duration-700"
+                    priority={true}
+                  /> */}
+                </div>
+              </div>
+              {/* 2nd Category */}
+              <div className="flex flex-col gap-1 col-span-1 row-span-1 bg-neutral-200 rounded-md">
+                <div className=""></div>
+              </div>
+              {/* 3nd Category */}
+              <div className="flex flex-col h-64 md:h-96 lg:h-120 gap-1 col-span-2 row-span-1 bg-neutral-200 rounded-md">
+                <div className=""></div>
+              </div>
+              {/* 4th Category */}
+              <div className="flex flex-col h-64 md:h-96 lg:h-120 gap-1 col-span-1 row-span-1 bg-neutral-200 rounded-md">
+                <div className=""></div>
+              </div>
+              {/* 5th Category */}
+              <div className="flex flex-col gap-1 col-span-1 row-span-2 bg-neutral-200 rounded-md">
+                <div className=""></div>
+              </div>
+              {/* 6th Category */}
+              <div className="flex flex-col h-64 gap-1 col-span-1 row-span-1 bg-neutral-200 rounded-md">
+                <div className=""></div>
+              </div>
+            </div>
+          </div>
+        </div>
 
 
         <Footer/>
