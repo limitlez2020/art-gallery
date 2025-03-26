@@ -19,50 +19,6 @@ const syne = Syne({subsets: ["latin"]})
 
 
 export default function Home() {
-  /* State for the different art categories: */
-  const [currentCategory, setCurrentCategory] = useState(0);
-
-
-  /* Array of categories: */
-  const categories = [
-    {
-      image: "/abstract.jpg",
-      name: "ABSTRACT",
-      art_total: 2
-    },
-
-    {
-      image: "/minimal.jpg",
-      name: "MINIMALISM",
-      art_total: 3
-    },
-  ]
-
-
-  /* Function to move to prev category: */
-  const handlePrev = () => {
-    if (currentCategory > 0) {
-      setCurrentCategory(currentCategory - 1);
-    }
-    else if (currentCategory === 0) {
-      /* Wrap to the last category */
-      setCurrentCategory(categories.length - 1);
-    }
-  }
-
-
-  /* Function to move to next category: */
-  const handleNext = () => {
-    if (currentCategory < categories.length - 1) {
-      setCurrentCategory(currentCategory + 1);
-    }
-    else if (currentCategory === categories.length - 1) {
-      /* Wrap to the first category */
-      setCurrentCategory(0);
-    }
-  }
-
-
 
   return (
     /* Main container: */
@@ -138,40 +94,51 @@ export default function Home() {
         <div className="flex flex-col mt-34 mb-34 w-5/6 border-b-[1px] border-black"/>
 
 
+        {/* Painting Styles: */}
         {/* Categories: */}
         <div className="flex flex-col w-5/6 h-full mb-24 gap-3">
           {/* Header: */}
           <p className={`${space_grotesk.className} self-center text-xl font-medium mb-3`}>CATEGORIES</p>
           
           {/* Abstract */}
-          <button className="flex flex-row items-center justify-between gap-5 p-4 px-6 rounded-full border-[1px] border-black  cursor-pointer hover:bg-black/85 hover:text-white">
-            <p className="text-4xl">abstract</p>
-            <ArrowLongRightIcon className="size-10 stroke-1"/>
-          </button>
+          <Link href={"/categories/abstract"}>
+            <button className="flex flex-row w-full items-center justify-between gap-5 p-4 px-6 rounded-full border-[1px] border-black cursor-pointer hover:bg-black/85 hover:text-white">
+              <p className="text-4xl">abstract</p>
+              <ArrowLongRightIcon className="size-10 stroke-1"/>
+            </button>
+          </Link>
 
           {/* Minimalism */}
-          <button className="flex flex-row items-center justify-between gap-5 p-4 px-6 rounded-full border-[1px] border-black cursor-pointer hover:bg-black/85 hover:text-white">
-            <p className="text-4xl">minimalism</p>
-            <ArrowLongRightIcon className="size-10 stroke-1"/>
-          </button>
+          <Link href={"/categories/minimalism"}>
+            <button className="flex flex-row w-full items-center justify-between gap-5 p-4 px-6 rounded-full border-[1px] border-black  cursor-pointer hover:bg-black/85 hover:text-white">
+              <p className="text-4xl">minimalism</p>
+              <ArrowLongRightIcon className="size-10 stroke-1"/>
+            </button>
+          </Link>
 
-          {/* Realism */}
-          <button className="flex flex-row items-center justify-between gap-5 p-4 px-6 rounded-full border-[1px] border-black cursor-pointer hover:bg-black/85 hover:text-white">
-            <p className="text-4xl">realism</p>
-            <ArrowLongRightIcon className="size-10 stroke-1"/>
-          </button>
+          {/* Renaissance */}
+          <Link href={"/categories/renaissance"}>
+            <button className="flex flex-row w-full items-center justify-between gap-5 p-4 px-6 rounded-full border-[1px] border-black cursor-pointer hover:bg-black/85 hover:text-white">
+              <p className="text-4xl">renaissance</p>
+              <ArrowLongRightIcon className="size-10 stroke-1"/>
+            </button>
+          </Link>
 
           {/* Surrealism */}
-          <button className="flex flex-row items-center justify-between gap-5 p-4 px-6 rounded-full border-[1px] border-black cursor-pointer hover:bg-black/85 hover:text-white">
-            <p className="text-4xl">surrealism</p>
-            <ArrowLongRightIcon className="size-10 stroke-1"/>
-          </button>
+          <Link href={"/categories/surrealism"}>
+            <button className="flex flex-row w-full items-center justify-between gap-5 p-4 px-6 rounded-full border-[1px] border-black cursor-pointer hover:bg-black/85 hover:text-white">
+              <p className="text-4xl">surrealism</p>
+              <ArrowLongRightIcon className="size-10 stroke-1"/>
+            </button>
+          </Link>
 
           {/* AI */}
-          <button className="flex flex-row items-center justify-between gap-5 p-4 px-6 rounded-full border-[1px] border-black cursor-pointer hover:bg-black/85 hover:text-white">
-            <p className="text-4xl">ai</p>
-            <ArrowLongRightIcon className="size-10 stroke-1"/>
-          </button>
+          <Link href={"/categories/ai"}>
+            <button className="flex flex-row w-full items-center justify-between gap-5 p-4 px-6 rounded-full border-[1px] border-black cursor-pointer hover:bg-black/85 hover:text-white">
+              <p className="text-4xl">ai</p>
+              <ArrowLongRightIcon className="size-10 stroke-1"/>
+            </button>
+          </Link>
 
         </div>
 

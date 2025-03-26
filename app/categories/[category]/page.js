@@ -32,12 +32,12 @@ export default function Category () {
 
   return (
     /* Main container: */
-    <div className="flex flex-col h-full min-h-screen bg-neutral-200">
+    <div className="flex flex-col h-full min-h-screen bg-black">
       {/* NavBar */}
       <NavBar/>
 
       {/* Main Content Container: */}
-      <div className="flex flex-col grow w-full h-full justify-center items-center mt-28">
+      <div className="flex flex-col bg-neutral-200 grow w-full h-full justify-center items-center mt-1 pt-28">
         {/* Header: */}
         <h1 className="text-3xl font-medium">{categoryName}</h1>
         {/* Category Artworks: */}
