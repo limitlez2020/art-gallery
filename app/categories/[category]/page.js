@@ -125,7 +125,7 @@ export default function Category () {
               <div className="w-full h-[1px] bg-neutral-400"/>
 
               {/* Bottom */}
-              <p className="flex self-center text-sm text-black/85">"{artworks[currentArtworkIndex].artworkStory}"</p>
+              <p className="flex self-center text-sm text-black/85">&quot;{artworks[currentArtworkIndex].artworkStory}&quot;</p>
             </div>
 
 
