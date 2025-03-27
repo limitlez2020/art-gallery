@@ -96,9 +96,9 @@ export default function Home() {
 
         {/* Painting Styles: */}
         {/* Categories: */}
-        <div className="flex flex-col w-5/6 h-full mb-24 gap-3">
+        <div className="flex flex-col w-5/6 h-full mb-32 gap-3">
           {/* Header: */}
-          <p className={`${space_grotesk.className} self-center text-xl font-medium mb-3`}>CATEGORIES</p>
+          <p className={`${space_grotesk.className} self-center text-xl font-medium mb-3`}>GALLERY</p>
           
           {/* Abstract */}
           <Link href={"/categories/abstract"}>
@@ -143,8 +143,8 @@ export default function Home() {
         </div>
 
 
-        <Footer/>
       </div>
+      <Footer/>
     </div>
   );
 }

@@ -8,7 +8,7 @@ import { FileUpload } from "@/components/ui/file-upload";
 import {Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue} from "@/components/ui/select"
 import { db, storage } from "@/firebase.js"
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { doc, collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { time } from "framer-motion";
 import Link from "next/link";
 
@@ -53,7 +53,7 @@ export default function UploadArt () {
     setUploading(true);
 
     try {
-      // TODO: Have to do image coz they want to charge me for storage
+      // TODO: Have to do image coz they want to charge me for storage - use cloudinary
       // const imageUrl = await uploadImage(artworkImage)
   
       /* Turn data gotten from the formelements into one object */
