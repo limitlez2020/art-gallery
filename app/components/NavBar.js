@@ -17,7 +17,7 @@ export default function NavBar () {
           {/* Logo */}
           <Link href={"/"} className={`${space_grotesk.className} font-medium`}>COLLART</Link>
           {/* Gallery */}
-          <Link href={"/"} className="hover:font-semibold underline">gallery</Link>
+          <Link href={"/#gallery"} className="hover:font-semibold underline">gallery</Link>
         </div>
       </div>
   

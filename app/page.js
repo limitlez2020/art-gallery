@@ -94,14 +94,13 @@ export default function Home() {
         <div className="flex flex-col mt-34 mb-34 w-5/6 border-b-[1px] border-black"/>
 
 
-        {/* Painting Styles: */}
-        {/* Categories: */}
-        <div className="flex flex-col w-5/6 h-full mb-32 gap-3">
+        {/* Gallery: */}
+        <div id="gallery" className="flex flex-col w-5/6 h-full mb-32 gap-3">
           {/* Header: */}
           <p className={`${space_grotesk.className} self-center text-xl font-medium mb-3`}>GALLERY</p>
           
           {/* Abstract */}
-          <Link href={"/categories/abstract"}>
+          <Link href={"/gallery/abstract"}>
             <button className="flex flex-row w-full items-center justify-between gap-5 p-4 px-6 rounded-full border-[1px] border-black cursor-pointer hover:bg-black/85 hover:text-white">
               <p className="text-4xl">abstract</p>
               <ArrowLongRightIcon className="size-10 stroke-1"/>
@@ -109,7 +108,7 @@ export default function Home() {
           </Link>
 
           {/* Minimalism */}
-          <Link href={"/categories/minimalism"}>
+          <Link href={"/gallery/minimalism"}>
             <button className="flex flex-row w-full items-center justify-between gap-5 p-4 px-6 rounded-full border-[1px] border-black  cursor-pointer hover:bg-black/85 hover:text-white">
               <p className="text-4xl">minimalism</p>
               <ArrowLongRightIcon className="size-10 stroke-1"/>
@@ -117,7 +116,7 @@ export default function Home() {
           </Link>
 
           {/* Renaissance */}
-          <Link href={"/categories/renaissance"}>
+          <Link href={"/gallery/renaissance"}>
             <button className="flex flex-row w-full items-center justify-between gap-5 p-4 px-6 rounded-full border-[1px] border-black cursor-pointer hover:bg-black/85 hover:text-white">
               <p className="text-4xl">renaissance</p>
               <ArrowLongRightIcon className="size-10 stroke-1"/>
@@ -125,7 +124,7 @@ export default function Home() {
           </Link>
 
           {/* Surrealism */}
-          <Link href={"/categories/surrealism"}>
+          <Link href={"/gallery/surrealism"}>
             <button className="flex flex-row w-full items-center justify-between gap-5 p-4 px-6 rounded-full border-[1px] border-black cursor-pointer hover:bg-black/85 hover:text-white">
               <p className="text-4xl">surrealism</p>
               <ArrowLongRightIcon className="size-10 stroke-1"/>
@@ -133,7 +132,7 @@ export default function Home() {
           </Link>
 
           {/* AI */}
-          <Link href={"/categories/ai"}>
+          <Link href={"/gallery/ai"}>
             <button className="flex flex-row w-full items-center justify-between gap-5 p-4 px-6 rounded-full border-[1px] border-black cursor-pointer hover:bg-black/85 hover:text-white">
               <p className="text-4xl">ai</p>
               <ArrowLongRightIcon className="size-10 stroke-1"/>
