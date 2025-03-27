@@ -8,7 +8,7 @@ import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid"
 import NavBar from "@/app/components/NavBar"
 import Footer from "@/app/components/Footer"
 import { db } from "@/firebase"
-import  { collection, query, where, getDoc, getDocs } from "firebase/firestore"
+import  { collection, query, where, getDoc, getDocs, orderBy } from "firebase/firestore"
 import { Space_Grotesk } from "next/font/google"
 import { time } from "framer-motion"
 
@@ -31,8 +31,11 @@ export default function Category () {
 
   /* Get data from firebase database for the specific category */
   const getArtworks = async() => {
-    /* 1. Query to get all the documents where their artCategory field is minimalism */
-    const q = query(collection(db, "artworks"), where("artCategory", "==", categoryName));
+    /* 1. Query to get all the documents for the specific category we're on
+     *    and ensure the newest artworks come first */
+    const q = query(collection(db, "artworks"), 
+                    where("artCategory", "==", categoryName),
+                    orderBy("timestamp", "desc"));
     /* 2. Get all such documents */
     const querySnapshot = await getDocs(q)
     /* 3. Get the data from the documents into an array */
@@ -61,7 +64,7 @@ export default function Category () {
       setCurrentArtworkIndex(currentArtworkIndex + 1)
     }
   }
-  
+
 
   /* Function to go to previous artwork in the array of artworks */
   function prevArtwork () {
