@@ -50,7 +50,7 @@ export default function Category () {
   useEffect(() => {
     setArtworks([]); /* Clear existing data before fetching new ones */
     getArtworks();
-  }, [categoryName]); /* Re-fetch only when categoryName changes */
+  }, []); /* Re-fetch only when categoryName changes */
 
 
 
