@@ -97,7 +97,7 @@ export default function Category () {
       {/* Main Content Container: */}
       <div className="flex flex-col bg-neutral-200 grow w-[99.5%] h-full self-center justify-center items-center rounded-md mt-1 pt-24">
         {/* Header: */}
-        <h1 className={`${space_grotesk.className} text-7xl font-medium uppercase`}>{categoryName}</h1>
+        <h1 className={`${space_grotesk.className} text-5xl sm:text-7xl font-medium uppercase`}>{categoryName}</h1>
         {artworks.length > 0 ? (
           /* Artwork: */
           <div className="flex flex-col justify-center items-center w-4/6 gap-10 mt-40">
@@ -125,7 +125,9 @@ export default function Category () {
               <div className="w-full h-[1px] bg-neutral-400"/>
 
               {/* Bottom */}
-              <p className="flex self-center text-sm text-black/85">&quot;{artworks[currentArtworkIndex].artworkStory}&quot;</p>
+              <div className="flex w-4/5 self-center items-center justify-center">
+                <p className=" text-xs text-black/85">&quot;{artworks[currentArtworkIndex].artworkStory}&quot;</p>
+              </div>
             </div>
 
 
