@@ -112,11 +112,11 @@ export default function Category () {
             {/* Details */}
             <div className="flex flex-col w-full mt-5 gap-3">
               {/* Top */}
-              <div className="flex flex-row w-full justify-between gap-10">
-                <p className="text-2xl lowercase font-semibold">{artworks[currentArtworkIndex].artworkName}</p>
-                <div className="flex flex-col text-black/85 text-sm">
-                  <p>date: {getDate(artworks[currentArtworkIndex].timestamp)}</p>
-                  <p>category: {artworks[currentArtworkIndex].artCategory}</p>
+              <div className="flex flex-row w-full justify-between gap-2">
+                <p className="w-3/5 text-xl sm:text-2xl lowercase font-semibold">{artworks[currentArtworkIndex].artworkName}</p>
+                <div className="flex flex-col w-2/5 text-black/85 text-sm text-end">
+                  <p>{getDate(artworks[currentArtworkIndex].timestamp)}</p>
+                  <p>{artworks[currentArtworkIndex].artCategory}</p>
                   <p>by: {artworks[currentArtworkIndex].artistName}</p>
                 </div>
               </div>
@@ -126,7 +126,7 @@ export default function Category () {
 
               {/* Bottom */}
               <div className="flex w-4/5 self-center items-center justify-center">
-                <p className=" text-xs text-black/85">&quot;{artworks[currentArtworkIndex].artworkStory}&quot;</p>
+                <p className="text-center text-xs text-black/85">&quot;{artworks[currentArtworkIndex].artworkStory}&quot;</p>
               </div>
             </div>
 
