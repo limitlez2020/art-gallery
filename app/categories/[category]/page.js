@@ -30,22 +30,25 @@ export default function Category () {
 
 
   /* Get data from firebase database for the specific category */
-  const getAtworks = async() => {
+  const getArtworks = async() => {
     /* 1. Query to get all the documents where their artCategory field is minimalism */
     const q = query(collection(db, "artworks"), where("artCategory", "==", categoryName));
     /* 2. Get all such documents */
     const querySnapshot = await getDocs(q)
-    /* 3. Add the documents to the artworks state */
-    querySnapshot.forEach((doc) => {
-      setArtworks((prev) => [...prev, doc.data()])
-    });
+    /* 3. Get the data from the documents into an array */
+    const artworksArray = querySnapshot.docs.map((doc) => doc.data());
+    /* 4. Set the artworks array to the state */
+    setArtworks(artworksArray)
   }
 
 
-  /* Use effect to display all artworks for this category when page loads */
+
+  /* Use effect to display all artworks */
   useEffect(() => {
-    getAtworks()
-  }, [])
+    setArtworks([]); /* Clear existing data before fetching new ones */
+    getArtworks();
+  }, [categoryName]); /* Re-fetch only when categoryName changes */
+
 
 
   /* Function to go to next artwork in the array of artworks */
@@ -58,6 +61,7 @@ export default function Category () {
       setCurrentArtworkIndex(currentArtworkIndex + 1)
     }
   }
+  
 
   /* Function to go to previous artwork in the array of artworks */
   function prevArtwork () {
