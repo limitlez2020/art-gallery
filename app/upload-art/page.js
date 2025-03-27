@@ -109,9 +109,9 @@ export default function UploadArt () {
           <form className="flex flex-col w-[95%] items-center py-8 mb-10"
                 onSubmit={handleSubmit}>
             {/* Header: */}
-            <div className="flex flex-col items-center">
-              <p className={`${space_grotesk.className} text-6xl font-medium`}>Upload Artwork</p>
-              <p className="font-normal text-neutral-600 text-center">Fill out the form below to upload your artwork.</p>
+            <div className="flex flex-col items-center justify- text-center">
+              <p className={`${space_grotesk.className} text-4xl sm:text-6xl font-medium`}>Upload Artwork</p>
+              <p className="font-normal text-neutral-600 text-sm sm:text-base">Fill out the form below to upload your artwork.</p>
             </div>
 
             {/* Upload area */}
