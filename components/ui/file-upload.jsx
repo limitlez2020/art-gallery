@@ -50,11 +50,11 @@ export const FileUpload = ({
   });
 
   return (
-    <div className="w-full" {...getRootProps()}>
+    <div className="w-full border-" {...getRootProps()}>
       <motion.div
         onClick={handleClick}
         whileHover="animate"
-        className="p-10 group/file block rounded-lg cursor-pointer w-full relative overflow-hidden">
+        className="p-10 group/file block rounded-lg bg-neutral-200 cursor-pointer w-full relative overflow-hidden">
         <input
           ref={fileInputRef}
           id="file-upload-handle"
@@ -70,10 +70,12 @@ export const FileUpload = ({
             className="relative z-20 font-bold text-neutral-700 dark:text-neutral-300 text-sm">
             Upload file
           </p> */}
-          {/* <p
-            className="relative z-20 font-normal text-neutral-400 dark:text-neutral-400 text-xs text-center mt-2">
+          <p
+            className="relative z-20 font-normal text-neutral-600 text-sm text-center mb-5">
             Drag or drop your files here or click to upload
-          </p> */}
+          </p>
+
+          {/* Display the file info after its uploaded */}
           <div className="relative w-full max-w-xl mx-auto">
             {files.length > 0 &&
               files.map((file, idx) => (
@@ -82,7 +84,7 @@ export const FileUpload = ({
                   key={"file" + idx}
                   layoutId={idx === 0 ? "file-upload" : "file-upload-" + idx}
                   className={cn(
-                    "relative overflow-hidden z-40 bg-white dark:bg-neutral-900 flex flex-col items-start justify-start p-4 mt-4 w-full mx-auto rounded-none",
+                    "relative overflow-hidden z-40 bg-white dark:bg-neutral-900 flex flex-col items-start justify-start p-4 mt-4 w-full mx-auto rounded-sm",
                     "shadow-sm"
                   )}>
                   <div className="flex justify-between w-full items-center gap-4">
@@ -120,6 +122,8 @@ export const FileUpload = ({
                   </div> */}
                 </motion.div>
               ))}
+
+            {/* No file uploaded yet */}
             {!files.length && (
               <motion.div
                 layoutId="file-upload"
@@ -129,9 +133,10 @@ export const FileUpload = ({
                   stiffness: 300,
                   damping: 20,
                 }}
+                /* The upload button */
                 className={cn(
-                  "relative group-hover/file:shadow-2xl z-40 bg-white dark:bg-neutral-900 flex items-center justify-center h-32 mt-4 w-full max-w-[8rem] mx-auto rounded-md",
-                  "shadow-[0px_10px_50px_rgba(0,0,0,0.1)]"
+                  "relative group-hover/file:shadow-2xl z-40 bg-neutral-700 flex items-center justify-center h-32 mt-4 w-full max-w-[8rem] mx-auto rounded-md",
+                  "shadow-[0px_10px_50px_rgba(0,0,0,0.3)]"
                 )}>
                 {isDragActive ? (
                   <motion.p
@@ -139,10 +144,10 @@ export const FileUpload = ({
                     animate={{ opacity: 1 }}
                     className="text-neutral-600 flex flex-col items-center">
                     Drop it
-                    <IconUpload className="h-4 w-4 text-neutral-600 dark:text-neutral-400" />
+                    <IconUpload className="h-4 w-4 text-neutral-100" />
                   </motion.p>
                 ) : (
-                  <IconUpload className="h-4 w-4 text-neutral-600 dark:text-neutral-300" />
+                  <IconUpload className="h-4 w-4 text-neutral-100" />
                 )}
               </motion.div>
             )}
@@ -164,7 +169,8 @@ export function GridPattern() {
   const rows = 11;
   return (
     <div
-      className="flex bg-gray-100 dark:bg-neutral-900 shrink-0 flex-wrap justify-center items-center gap-x-px gap-y-px  scale-105">
+      // className="flex bg-gray-100 dark:bg-neutral-900 shrink-0 flex-wrap justify-center items-center gap-x-px gap-y-px scale-105">
+      className="flex bg-neutral-200 shrink-0 flex-wrap justify-center items-center gap-x-px gap-y-px scale-105">
       {Array.from({ length: rows }).map((_, row) =>
         Array.from({ length: columns }).map((_, col) => {
           const index = row * columns + col;
@@ -173,8 +179,9 @@ export function GridPattern() {
               key={`${col}-${row}`}
               className={`w-10 h-10 flex shrink-0 rounded-[2px] ${
                 index % 2 === 0
-                  ? "bg-gray-50 dark:bg-neutral-950"
-                  : "bg-gray-50 dark:bg-neutral-950 shadow-[0px_0px_1px_3px_rgba(255,255,255,1)_inset] dark:shadow-[0px_0px_1px_3px_rgba(0,0,0,1)_inset]"
+                  ? "bg-neutral-200"
+                  : "bg-neutral-200 shadow-[0px_0px_1px_3px_rgba(0,0,0,0.05)_inset]"
+                  // : "bg-gray-50 shadow-[0px_0px_1px_3px_rgba(255,255,255,1)_inset] dark:shadow-[0px_0px_1px_3px_rgba(0,0,0,1)_inset]"
               }`} />
           );
         }))}

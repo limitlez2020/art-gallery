@@ -1,7 +1,6 @@
 "use client"
 
 import { useRef, useState } from "react";
-import { ArrowDownTrayIcon, ArrowUpTrayIcon } from "@heroicons/react/24/solid";
 import Footer from "../components/Footer";
 import NavBar from "../components/NavBar";
 import { FileUpload } from "@/components/ui/file-upload";
@@ -9,8 +8,12 @@ import {Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigg
 import { db, storage } from "@/firebase.js"
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { doc, collection, addDoc, serverTimestamp } from "firebase/firestore";
-import { time } from "framer-motion";
 import Link from "next/link";
+import { Space_Grotesk } from "next/font/google";
+
+
+const space_grotesk = Space_Grotesk({subsets: ["latin"]})
+
 
 export default function UploadArt () {
 
@@ -92,16 +95,17 @@ export default function UploadArt () {
 
 
 
+
   return (
-    <div className="flex flex-col h-full min-h-screen bg-neutral-200">
+    <div className="flex flex-col h-full min-h-screen bg-black">
       <NavBar/>
       
       {/* Form Container */}
-      <div className="flex flex-grow my-20 w-[93%] justify-center items-center self-center">
-        {submitted ? (
+      <div className="flex flex-grow bg-neutral-200 py-20 mt-1 w-[99.5%] justify-center items-center self-center rounded-md">
+        {!submitted ? (
           /* Display message that the artwork has been submitted */
-          <div className="flex flex-col bg-lack items-center justify-center">
-            <p className="text-7xl font-semibold">artwork</p>
+          <div className={`${space_grotesk.className} flex flex-col bg-lack items-center justify-center`}>
+            <p className="text-7xl font-semibold leading-12">artwork</p>
             <p className="text-7xl font-semibold">uploaded</p>
             <Link className="mt-4 flex flex-row justify-center items-center gap-1" href={"/"}>
               <p className="border-b-[1px] border-black/25 text-sm hover:scale-[100.5%]">check gallery to see your artwork</p>
@@ -110,31 +114,28 @@ export default function UploadArt () {
           </div>
         ) : (
           /* Form */
-          <form className="flex flex-col w-[90%] border-[1px] items-center bg-white py-8"
+          <form className="flex flex-col w-[95%] items-center py-8 mb-10"
                 onSubmit={handleSubmit}>
             {/* Header: */}
             <div className="flex flex-col items-center">
-              <p className="text-xl font-medium">Upload Artwork</p>
-              <p
-              className="font-normal text-neutral-400 dark:text-neutral-400 text-xs text-center">
-              Drag or drop your files here or click to upload
-            </p>
+              <p className={`${space_grotesk.className} text-6xl font-medium`}>Upload Artwork</p>
+              <p className="font-normal text-neutral-600 text-center">Fill out the form below to upload your artwork.</p>
             </div>
 
             {/* Upload area */}
-            <div className="flex flex-col p-2 mt-5 w-5/6 items-center justify-center border-[1px] border-neutral-300 border-dotted">
+            <div className="flex flex-col p-2 mt-24 w-5/6 items-center justify-center border-[2px] border-black border-dotted">
               <FileUpload onChange={(file) => setArtworkImage(file)}/>
             </div>
 
             {/* Artist and artwork details: */}
-            <div className="flex flex-col mt-5 w-5/6 gap-4">
+            <div className="flex flex-col mt-4 w-5/6 gap-4 text-sm">
               {/* Artist Name: */}
               <div className="flex flex-col w-full">
-                <p className="text-xs">Name</p>
+                <p>Name</p>
                 <input
                   required 
                   type="text" 
-                  className="w-full border-[1px] border-neutral-200 text-xs p-2"
+                  className="w-full border-[1px] border-black p-2 rounded-sm"
                   placeholder="Type your name"
                   value={artistName}
                   onChange={(e) => {setArtistName(e.target.value)}}
@@ -143,11 +144,11 @@ export default function UploadArt () {
 
               {/* Artwork Name: */}
               <div className="flex flex-col w-full">
-                <p className="text-xs">Artwork Name</p>
+                <p className="text-sm">Artwork Name</p>
                 <input
                   required 
                   type="text" 
-                  className="w-full border-[1px] border-neutral-200 text-xs p-2"
+                  className="w-full border-[1px] border-black p-2 rounded-sm"
                   placeholder="Type the name of your artwork"
                   value={artworkName}
                   onChange={(e) => {setArtworkName(e.target.value)}}
@@ -156,16 +157,19 @@ export default function UploadArt () {
 
               {/* Artwork Category: */}
               <div className="flex flex-col w-full">
-                <p className="text-xs">Artwork Category</p>
+                <p>Artwork Category</p>
                 <Select onValueChange={setArtCategory}>
-                  <SelectTrigger className="w-full rounded-none text-xs">
+                  <SelectTrigger className="w-full rounded-sm border-black">
                     <SelectValue placeholder="Select an art category" />
                   </SelectTrigger>
-                  <SelectContent>
+                  <SelectContent className="bg-neutral-300">
                     <SelectGroup>
-                      <SelectLabel>Category</SelectLabel>
+                      <SelectLabel className="text-xs text-black/70">category</SelectLabel>
                       <SelectItem value="abstract" className="text-sm">Abstract</SelectItem>
                       <SelectItem value="minimalism" className="text-sm">Minimalism</SelectItem>
+                      <SelectItem value="renaissance" className="text-sm">Renaissance</SelectItem>
+                      <SelectItem value="surrealism" className="text-sm">Surrealism</SelectItem>
+                      <SelectItem value="ai" className="text-sm">AI</SelectItem>
                     </SelectGroup>
                   </SelectContent>
                 </Select>
@@ -174,10 +178,10 @@ export default function UploadArt () {
 
               {/* Story behind artwork */}
               <div className="flex flex-col w-full">
-                <p className="text-xs">Artwork Story</p>
+                <p>Artwork Story</p>
                 <textarea
                   required
-                  className="text-w-full border-[1px] h-20 border-neutral-200 text-xs p-2"
+                  className="text-w-full border-[1px] h-20 border-black p-2 rounded-sm"
                   placeholder="Story behind your artwork"
                   value={artworkStory}
                   onChange={(e) => setArtworkStory(e.target.value)}
@@ -186,8 +190,14 @@ export default function UploadArt () {
             </div>
 
             {/* Submit the form */}
-            <button className="flex self-center justify-center bg-black mt-4 p-2 px-10 text-white text-xs cursor-pointer">
-              {uploading ? "Uploading..." : "Submit"}
+            <button className={` ${space_grotesk.className} flex self-center justify-center bg-neutral-800 text-white mt-5 py-2 px-7 text-sm cursor-pointer`}>
+              {uploading ? (
+                <p>Uploading...</p>
+              ) : (
+                <div className="flex flex-row justify-center items-center gap-2">
+                  Submit
+                </div>
+              )}
             </button>
 
           </form>
