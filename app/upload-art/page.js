@@ -27,54 +27,76 @@ export default function UploadArt () {
   const [submitted, setSubmitted] = useState(false) /* Track if form is submitted */
 
 
-  /* Function to upload artwork image to the firebase database: */
-  const uploadImage = async (file) => {
-    /* Make sure file exists: */
-    if (!file) { return null }
-
-    try {
-      /* Create a reference to the storage: */
-      const storageRef = ref(storage, `artworks/${file.name}`);
-      /* Upload the file to the storage: */
-      await uploadBytes(storageRef, file);
-      /* Get the download URL of the uploaded file: */
-      const imageURL = await getDownloadURL(storageRef);
-      return imageURL;
-    }
-    catch (error) {
-      console.error("Error uploading image: ", error)
-      return null;
-    }
-  }
-
-
-  /* Function to get all the data submitted from the form
-   * and upload them all to the database: */
+  
+  
+  /* Function to upload the artwork image to storage
+   * and store the image URL alongside the artwork details
+   * in the supabase databse (table) */
   const handleSubmit = async (event) => {
-    /* Prevent page reload */
+    /* Prevent the page from reloading */
     event.preventDefault();
     setUploading(true);
 
     try {
-      // TODO: Have to do image coz they want to charge me for storage - use cloudinary
-      // const imageUrl = await uploadImage(artworkImage)
-  
-      /* Turn data gotten from the formelements into one object */
-      const artworkData = {
-        artistName,
-        artworkName,
-        artCategory,
-        artworkStory,
-        // TODO: uncomment below
-        // imageUrl,
-        timestamp: serverTimestamp()
-      };
+      /* Ensure all required fields are filled */
+      // TODO: look for a better way to do this in the divs themselves
+      if (!artistName || !artworkName || !artworkStory || !artworkImage || !artCategory) {
+        alert("Please fill out all required fields.");
+        setUploading(false);
+        return;
+      }
 
-      /* Save the artwork data to the database */
-      await addDoc(collection(db, "artworks"), artworkData);
 
-      /* Update submit state */
-      setSubmitted(true)
+      /* NOTE:
+       * Artwork Image is an array that cotains the file,
+       * the file is the only element of artwork image
+       * so to access the actual file you have to do artworkImage[0] */
+
+      /* Upload Image to supabase storage */
+      const formData = new FormData();
+      formData.append("file", artworkImage[0]);
+      formData.append("fileName", `${Date.now()}-${artworkImage[0].name}`);
+
+
+      const response = await fetch("/api/upload-image", {
+        method: "POST",
+        body: formData,
+      });
+
+      /* Get the image URL */
+      const responseData = await response.json();
+      const imageUrl = responseData.imageUrl;
+      if (!imageUrl) {
+        alert("image upload failed.");
+        setUploading(false);
+        return;
+      }
+
+      
+      /* Store artwork details to supabase database */
+      const storeResponse = await fetch("/api/store-artwork", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          title: artworkName,   
+          artist: artistName,   
+          category: artCategory,
+          story: artworkStory,  
+          image_url: imageUrl,
+        }),
+      });
+
+      /* Get the stored data - artwork details */
+      const storedData = await storeResponse.json();
+      if (!storedData) {
+        alert("Failed to store artwork details.");
+        setUploading(false);
+        return;
+      }
+
+
+      /* Mark the form as submitted */
+      setSubmitted(true);
     }
     catch (error) {
       console.error("Error submitting artwork: ", error)

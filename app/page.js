@@ -90,7 +90,7 @@ export default function Home() {
           </div>
         </div>
 
-
+        {/* Dividing Line */}
         <div className="flex flex-col mt-34 mb-34 w-5/6 border-b-[1px] border-black"/>
 
 
