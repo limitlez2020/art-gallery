@@ -7,10 +7,8 @@ import Image from "next/image"
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid"
 import NavBar from "@/app/components/NavBar"
 import Footer from "@/app/components/Footer"
-import { db } from "@/firebase"
-import  { collection, query, where, getDoc, getDocs, orderBy } from "firebase/firestore"
 import { Space_Grotesk } from "next/font/google"
-import { time } from "framer-motion"
+import { createBrowserClient } from "@supabase/ssr"
 
 
 const space_grotesk = Space_Grotesk({subsets: ["latin"]})
@@ -31,25 +29,58 @@ export default function Category () {
 
   /* Get data from firebase database for the specific category */
   const getArtworks = async() => {
-    /* 1. Query to get all the documents for the specific category we're on
-     *    and ensure the newest artworks come first */
-    const q = query(collection(db, "artworks"), 
-                    where("artCategory", "==", categoryName),
-                    orderBy("timestamp", "desc"));
-    /* 2. Get all such documents */
-    const querySnapshot = await getDocs(q)
-    /* 3. Get the data from the documents into an array */
-    const artworksArray = querySnapshot.docs.map((doc) => doc.data());
-    /* 4. Set the artworks array to the state */
-    setArtworks(artworksArray)
+
+
+    /***************************************/
+    // // const supabase = await createClient();
+    // const supabase = createBrowserClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY);
+
+    // /* Get all the artworks for this specifc category and in
+    //  * descending order to ensure the newest artworks show first: */
+    // const { data, error } = await supabase
+    //   .from("artworks")
+    //   .select("*") /* select all columns */
+    //   .eq("artCategory", categoryName) /* filter by category */
+    //   .order("created_at", { ascending: false })
+
+    // /* Error handling */
+    // if (error) {
+    //   console.error("Error fetching artworks: ", error);
+    //   return;
+    // }
+
+    // /* Set the data - array of artworks - to the artworks state */
+    // setArtworks(data);
+    /***************************************/
   }
+  
+
+  /* Get data from supabase database for the specific category */
+  useEffect(() => {
+    async function fetchArtworks() {
+      try {
+        const result = await fetch(`/api/artworks/${categoryName}`);
+        if (!result.ok) {
+          console.error("Failed to fetch artworks");
+        }
+        const data = await result.json();
+        setArtworks(data.artworks);
+      }
+      catch (error) {
+        console.error("Error fetching artworks: ", error);
+      }
+    }
+    
+    /* Call the function to fetch the artworks */
+    fetchArtworks();
+  }, [categoryName]);
 
 
 
+  // TODO: Might delete this
   /* Use effect to display all artworks */
   useEffect(() => {
     setArtworks([]); /* Clear existing data before fetching new ones */
-    getArtworks();
   }, []); /* Re-fetch only when categoryName changes */
 
 
@@ -78,11 +109,13 @@ export default function Category () {
   }
 
 
-  /* Function to convert Firestor timestamp to a Date object: */
-  const getDate = (time) => {
-    const date = time.toDate();
-    const formattedDate = date ? date.toLocaleDateString() : "no date";
-    return formattedDate;
+  /* Function to convert Supabase timestamp to a Date object: */
+  const getDate = (timestamp) => {
+    if (!timestamp) {
+      return "no date";
+    }
+    const date = new Date(timestamp);
+    return date.toLocaleDateString();
   }
 
 
@@ -106,7 +139,7 @@ export default function Category () {
             {/* Image */}
             <div className="w-full h-80 md:h-120 lg:h-140 overflow-hidden border-[1px] border-black -mt-3 shadow-xl">
               {/* TODO: Image: */}
-              {/* <Image src={art_url} alt="Artwork" width={1920} height={1080}/> */}
+              <Image src={artworks[currentArtworkIndex].imageURL} alt="Artwork" width={1920} height={1080}/>
             </div>
 
             {/* Details */}
@@ -115,7 +148,7 @@ export default function Category () {
               <div className="flex flex-row w-full justify-between gap-2">
                 <p className="w-3/5 text-xl sm:text-2xl lowercase font-semibold">{artworks[currentArtworkIndex].artworkName}</p>
                 <div className="flex flex-col w-2/5 text-black/85 text-sm text-end">
-                  <p>{getDate(artworks[currentArtworkIndex].timestamp)}</p>
+                  <p>{getDate(artworks[currentArtworkIndex].created_at)}</p>
                   <p>{artworks[currentArtworkIndex].artCategory}</p>
                   <p>by: {artworks[currentArtworkIndex].artistName}</p>
                 </div>
