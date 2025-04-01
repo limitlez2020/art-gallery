@@ -77,13 +77,6 @@ export default function Category () {
 
 
 
-  // TODO: Might delete this
-  /* Use effect to display all artworks */
-  useEffect(() => {
-    setArtworks([]); /* Clear existing data before fetching new ones */
-  }, []); /* Re-fetch only when categoryName changes */
-
-
 
   /* Function to go to next artwork in the array of artworks */
   function nextArtwork () {
@@ -139,7 +132,13 @@ export default function Category () {
             {/* Image */}
             <div className="w-full h-80 md:h-120 lg:h-140 overflow-hidden border-[1px] border-black -mt-3 shadow-xl">
               {/* TODO: Image: */}
-              <Image src={artworks[currentArtworkIndex].imageURL} alt="Artwork" width={1920} height={1080}/>
+              <Image
+                src={artworks[currentArtworkIndex].imageURL}
+                alt="Artwork"
+                width={1920} height={1080}
+                className="w-[100%] h-[100%] object-cover hover:scale-105 transition-transform ease-in-out duration-700"
+                priority={true}
+              />
             </div>
 
             {/* Details */}
