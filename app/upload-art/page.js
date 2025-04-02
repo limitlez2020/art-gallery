@@ -9,6 +9,7 @@ import { db, storage } from "@/firebase.js"
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { doc, collection, addDoc, serverTimestamp } from "firebase/firestore";
 import Link from "next/link";
+import Image from "next/image";
 import { Space_Grotesk } from "next/font/google";
 
 
@@ -22,10 +23,13 @@ export default function UploadArt () {
   const [artworkName, setArtworkName] = useState("")
   const [artCategory, setArtCategory] = useState("")
   const [artworkStory, setArtworkStory] = useState("")
+  /* In the upload tab: contains an actual image file
+   * In ai generate tab: contains the public url to image from supabase storage */
   const [artworkImage, setArtworkImage] = useState(null)
   const [uploading, setUploading] = useState(false) /* Track if form is uploading to database */
   const [submitted, setSubmitted] = useState(false) /* Track if form is submitted */
   const [selected, setSelected] = useState("upload") /* Track what option is selected in the mini navbar */
+  const [aiArtPrompt, setAiArtPrompt] = useState("")
 
 
 
@@ -41,12 +45,40 @@ export default function UploadArt () {
     }
   }
 
+
+
+  /* Function to take the art prompt and send it to the api route and get the ai image url */
+  const generateArt = async () => {
+    try {
+      /* Get the generated art */
+      const response = await fetch("/api/generate-art", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ prompt: aiArtPrompt })
+      })
+
+      /* Get the image URL */
+      const data = await response.json();
+      const imageUrl = data.imageUrl;
+      console.log("url gotten from the art generation: ", imageUrl);
+
+      /* Set the artwork image url */
+      setArtworkImage(imageUrl);
+    }
+    catch (error) {
+      console.error("Error in generating AI art: ", error)
+    }
+  }
+
   
 
+  /* Use for submitting upload form */
   /* Function to upload the artwork image to storage
    * and store the image URL alongside the artwork details
    * in the supabase databse (table) */
-  const handleSubmit = async (event) => {
+  const handleSubmitUpload = async (event) => {
     /* Prevent the page from reloading */
     event.preventDefault();
     setUploading(true);
@@ -126,6 +158,63 @@ export default function UploadArt () {
 
 
 
+  /* Use for submitting the generate art form: */
+  const handleSubmitGenerate = async (event) => {
+    /* Prevent the page from reloading */
+    event.preventDefault();
+    setUploading(true);
+
+
+    try {
+      
+      /* Ensure all required fields are filled */
+      // TODO: look for a better way to do this in the divs themselves
+      if (!artistName || !artworkName || !artworkStory || !artworkImage) {
+        alert("Please fill out all required fields.");
+        setUploading(false);
+        return;
+      }
+
+      
+      /* Store artwork details to supabase database */
+      /* In this case, the artwork image is already a publicurl
+       * from supabase storage, so we just pass it in */
+      const storeResponse = await fetch("/api/store-artwork", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          title: artworkName,   
+          artist: artistName,   
+          category: artCategory,
+          story: artworkStory,  
+          image_url: artworkImage,
+        }),
+      });
+
+      /* Get the stored data - artwork details */
+      const storedData = await storeResponse.json();
+      if (!storedData) {
+        alert("Failed to store artwork details.");
+        setUploading(false);
+        return;
+      }
+
+
+      /* Mark the form as submitted */
+      setSubmitted(true);
+    }
+    catch (error) {
+      console.error("Error submitting artwork: ", error)
+    }
+    finally {
+      setUploading(false);
+    }
+  }
+
+
+
+
+
   return (
     <div className="flex flex-col h-full min-h-screen bg-black">
       <NavBar/>
@@ -166,7 +255,7 @@ export default function UploadArt () {
             {selected === "upload" ? (
               /* Upload Form */
               <form className="flex flex-col w-full items-center"
-                    onSubmit={handleSubmit}>
+                    onSubmit={handleSubmitUpload}>
                 {/* Header: */}
                 <div className="flex flex-col items-center justify- text-center">
                   <p className={`${space_grotesk.className} text-3xl sm:text-3xl font-medium`}>Upload Artwork</p>
@@ -255,7 +344,7 @@ export default function UploadArt () {
             
             ) : (
 
-              /* Generate Art */
+              /*******************  Generate Art  *************************/
               <div className="flex flex-col w-full items-center">
                 
                 {/* Header: */}
@@ -265,13 +354,34 @@ export default function UploadArt () {
                 </div>
 
 
-                <form className="flex flex-col w-full items-center"
-                      onSubmit={handleSubmit}>
+                {/* Art Area */}
+                <div className="flex flex-col mt-10 justify-center w-5/6 border-[1px] p-2 gap-2 rounded-sm">
+                  {/* Image */}
+                  {artworkImage && (
+                    <div className="flex w-full h-80 md:h-120 lg:h-140 overflow-hidden border-[1px] border-black shadow-xl">
+                      <Image
+                        src={artworkImage}
+                        alt="Artwork"
+                        width={1920} height={1080}
+                        className="w-[100%] h-[100%] object-fit hover:scale-105 transition-transform ease-in-out duration-700"
+                        priority={true}
+                      />
+                    </div>
+                  )}
+                  <textarea className="flex flex-col p-2 w-full h-28 text-sm border-dotted border-[1px]"
+                            placeholder="Describe the art you want to generate"
+                            onChange={(e) => setAiArtPrompt(e.target.value)}
+                  />
+                  <button className="flex justify-center self-end bg-black text-white text-xs py-1 px-2 cursor-pointer"
+                          onClick={generateArt}>
+                    Generate
+                  </button>
+                </div>
 
-                  {/* Upload area */}
-                  <div className="flex flex-col p-2 mt-7 w-5/6 items-center justify-center border-[2px] border-black border-dotted">
-                    <FileUpload onChange={(file) => setArtworkImage(file)}/>
-                  </div>
+
+
+                <form className="flex flex-col w-full items-center"
+                      onSubmit={handleSubmitGenerate}>
 
                   {/* Artist and artwork details: */}
                   <div className="flex flex-col mt-4 w-5/6 gap-4 text-sm">
@@ -301,33 +411,12 @@ export default function UploadArt () {
                       />
                     </div>
 
-                    {/* Artwork Category: */}
-                    {/* <div className="flex flex-col w-full">
-                      <p>Artwork Category</p>
-                      <Select onValueChange={setArtCategory}>
-                        <SelectTrigger className="w-full rounded-sm border-black">
-                          <SelectValue placeholder="Select an art category" />
-                        </SelectTrigger>
-                        <SelectContent className="bg-neutral-300">
-                          <SelectGroup>
-                            <SelectLabel className="text-xs text-black/70">category</SelectLabel>
-                            <SelectItem value="abstract" className="text-sm">Abstract</SelectItem>
-                            <SelectItem value="minimalism" className="text-sm">Minimalism</SelectItem>
-                            <SelectItem value="renaissance" className="text-sm">Renaissance</SelectItem>
-                            <SelectItem value="surrealism" className="text-sm">Surrealism</SelectItem>
-                            <SelectItem value="ai" className="text-sm">AI</SelectItem>
-                          </SelectGroup>
-                        </SelectContent>
-                      </Select>
-                    </div> */}
-
-
                     {/* Story behind artwork */}
                     <div className="flex flex-col w-full">
                       <p>Artwork Story</p>
                       <textarea
                         required
-                        className="text-w-full border-[1px] h-20 border-black p-2 rounded-sm"
+                        className="w-full border-[1px] h-20 border-black p-2 rounded-sm"
                         placeholder="Story behind your artwork"
                         value={artworkStory}
                         onChange={(e) => setArtworkStory(e.target.value)}
