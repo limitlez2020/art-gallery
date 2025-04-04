@@ -81,10 +81,12 @@ export default function Home() {
 
               <div className="flex flex-col">
                 {/* Button to view artwork */}
-                <button className={`${space_grotesk.className} flex flex-row border-black border-b-[1px] hover:text-black justify-center items-center gap-3 cursor-pointer`}>
-                  <p className="text-base md:text-lg">view artwork</p>
-                  <ArrowLongRightIcon className="size-7 stroke-[0.6]"/>
-                </button>
+                <Link href={"/#gallery"}>
+                  <button className={`${space_grotesk.className} flex flex-row border-black border-b-[1px] hover:text-black justify-center items-center gap-3 cursor-pointer`}>
+                    <p className="text-base md:text-lg">view more</p>
+                    <ArrowLongRightIcon className="size-7 stroke-[0.6]"/>
+                  </button>
+                </Link>
               </div>
             </div>
           </div>
