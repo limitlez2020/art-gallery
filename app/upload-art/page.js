@@ -30,6 +30,7 @@ export default function UploadArt () {
   const [submitted, setSubmitted] = useState(false) /* Track if form is submitted */
   const [selectedTab, setSelectedTab] = useState("upload") /* Track what option is selectedTab in the mini navbar */
   const [aiArtPrompt, setAiArtPrompt] = useState("")
+  const [generatingImage, setGeneratingImage] = useState(false) 
 
 
 
@@ -55,6 +56,8 @@ export default function UploadArt () {
   /* Function to take the art prompt and send it to the api route and get the ai image url */
   const generateArt = async () => {
     try {
+      setGeneratingImage(true);
+
       /* Get the generated art */
       const response = await fetch("/api/generate-art", {
         method: "POST",
@@ -74,6 +77,9 @@ export default function UploadArt () {
     }
     catch (error) {
       console.error("Error in generating AI art: ", error)
+    }
+    finally {
+      setGeneratingImage(false);
     }
   }
 
@@ -368,7 +374,7 @@ export default function UploadArt () {
                         src={artworkImage}
                         alt="Artwork"
                         width={1920} height={1080}
-                        className="w-[100%] h-[100%] object-fit hover:scale-105 transition-transform ease-in-out duration-700"
+                        className="w-[100%] h-[100%] object-fit"
                         priority={true}
                       />
                     </div>
@@ -379,7 +385,11 @@ export default function UploadArt () {
                   />
                   <button className="flex justify-center self-end bg-black text-white text-xs py-1 px-2 cursor-pointer"
                           onClick={generateArt}>
-                    Generate
+                    {generatingImage ? (
+                      <p>Generating...</p>
+                    ) : (
+                      <p>Generate</p>
+                    )}
                   </button>
                 </div>
 
