@@ -28,21 +28,26 @@ export default function UploadArt () {
   const [artworkImage, setArtworkImage] = useState(null)
   const [uploading, setUploading] = useState(false) /* Track if form is uploading to database */
   const [submitted, setSubmitted] = useState(false) /* Track if form is submitted */
-  const [selected, setSelected] = useState("upload") /* Track what option is selected in the mini navbar */
+  const [selectedTab, setSelectedTab] = useState("upload") /* Track what option is selectedTab in the mini navbar */
   const [aiArtPrompt, setAiArtPrompt] = useState("")
 
 
 
   /* Function to handle the toggle between mini navbar options: */
   const toggleSelect = () => {
-    if (selected === "upload") {
-      setSelected("generate");
+    if (selectedTab === "upload") {
+      setSelectedTab("generate");
       /* Set the category of the art to be automatically AI */
       setArtCategory("ai");
     }
-    else if (selected === "generate") {
-      setSelected("upload")
+    else if (selectedTab === "generate") {
+      setSelectedTab("upload")
     }
+
+    /* Clear the form when tab is switched */
+    setArtistName("");
+    setArtworkName("");
+    setArtworkStory("");
   }
 
 
@@ -239,20 +244,20 @@ export default function UploadArt () {
             {/* Inner Navbar */}
             <div className="flex flex-row items-center justify-between gap-1 px-1 bg-neutral-200 w-56 h-12 border-black border-[1px] mb-24">
               {/* Upload art */}
-              <button className={`flex items-center justify-center w-1/2 h-[80%] rounded-sm cursor-pointer ${selected === "upload" ? "text-white bg-black" : ""}`}
+              <button className={`flex items-center justify-center w-1/2 h-[80%] rounded-sm cursor-pointer ${selectedTab === "upload" ? "text-white bg-black" : ""}`}
                       onClick={toggleSelect}>
                   upload
               </button>
 
               {/* Generate art */}
-              <button className={`flex items-center justify-center w-1/2 h-[80%] rounded-sm cursor-pointer ${selected === "generate" ? "text-white bg-black" : ""}`}
+              <button className={`flex items-center justify-center w-1/2 h-[80%] rounded-sm cursor-pointer ${selectedTab === "generate" ? "text-white bg-black" : ""}`}
                       onClick={toggleSelect}>
                 generate
               </button>
             </div>
 
 
-            {selected === "upload" ? (
+            {selectedTab === "upload" ? (
               /* Upload Form */
               <form className="flex flex-col w-full items-center"
                     onSubmit={handleSubmitUpload}>
