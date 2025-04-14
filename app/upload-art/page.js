@@ -341,7 +341,7 @@ export default function UploadArt () {
                 </div>
 
                 {/* Submit the form */}
-                <button className={` ${space_grotesk.className} flex self-center justify-center bg-neutral-800 text-white mt-5 py-2 px-7 text-sm cursor-pointer`}>
+                <button type="submit" className={` ${space_grotesk.className} flex self-center justify-center bg-neutral-800 text-white mt-5 py-2 px-7 text-sm cursor-pointer`}>
                   {uploading ? (
                     <p>Uploading...</p>
                   ) : (
@@ -440,7 +440,7 @@ export default function UploadArt () {
                   </div>
 
                   {/* Submit the form */}
-                  <button className={` ${space_grotesk.className} flex self-center justify-center bg-neutral-800 text-white mt-5 py-2 px-7 text-sm cursor-pointer`}>
+                  <button type="submit" className={` ${space_grotesk.className} flex self-center justify-center bg-neutral-800 text-white mt-5 py-2 px-7 text-sm cursor-pointer`}>
                     {uploading ? (
                       <p>Uploading...</p>
                     ) : (
