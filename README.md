@@ -62,8 +62,7 @@ This project has been in development for about 4 weeks and is now live and funct
 
 ## 🚀 Usage
 
-**Live Demo**: [https://lnkd.in/e3XH57w6](https://lnkd.in/e3XH57w6)  
-**GitHub Repository**: [https://lnkd.in/eZuQBJr3](https://lnkd.in/eZuQBJr3)
+**Live Demo**: https://collart-art-gallery.vercel.app/
 
 - **Explore the Gallery**: Visit the homepage to view artworks created or uploaded by users.
 - **Upload Your Artwork**: Submit your art image along with its details via the upload form.
